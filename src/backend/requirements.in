@@ -1,0 +1,9 @@
+django
+djangorestframework
+markdown
+django-filter
+pip-tools
+python-dotenv
+psycopg2-binary
+django-cors-headers
+
