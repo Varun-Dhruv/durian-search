@@ -1,0 +1,61 @@
+version: "3.9"
+volumes:
+  db-data:
+
+services:
+  app-ui:
+    image: varun10000/ds-app-ui:latest
+    command: ["pnpm", "run", "start"]
+    build:
+      context: src/frontend
+      dockerfile: Dockerfile
+    container_name: ds-app-ui
+    restart: unless-stopped
+    env_file:
+      - envs/.env.production
+    depends_on:
+      - app-core
+    profiles:
+      - "app"
+    ports:
+      - 3000:3000
+  app-core:
+    image: varun10000/ds-app-core:latest
+    command:
+      [
+        "sh",
+        "-c",
+        "cd app && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000",
+      ]
+    build:
+      context: src/backend
+      dockerfile: Dockerfile
+    container_name: ds-app-core
+    restart: unless-stopped
+    env_file:
+      - envs/.env.production
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - "app"
+    ports:
+      - 8000:8000
+  db:
+    image: postgres:14
+    container_name: postgres
+    restart: always
+    env_file:
+      - envs/.env.production
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    profiles:
+      - "db"
+      - "app"
+    ports:
+      - 5432:5432
