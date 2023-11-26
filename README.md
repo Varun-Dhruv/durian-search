@@ -114,32 +114,50 @@ The following are the prerequisites for running the project without using docker
 - Node.js (version 18)
 - Python3.10
 - pnpm (as node package manager)
+- postgresql
 
 ### Installation
 
+#### With Docker
+
+```
+  $ docker compose --profile app up --build -d
+```
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+```
+  $ make start-backend
+  $ make start-frontend
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Demo
+
+#### E-Commerce Websites Used
+
+- Amazon India
+- Flipkart
+- Snapdeal
+- Jiomart
+- Blinkit
+
+[![Alt text](https://img.youtube.com/vi/pFfx44xsxXM/0.jpg)](https://www.youtube.com/watch?v=pFfx44xsxXM)
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [ ] Create Web UI for search and filters
-- [ ] Add pagination of results
-- [ ] Create API for search
-  - [ ] Perform Web Scraping to gather information from websites
-  - [ ] Add the Product info to database
+- [x] Create Web UI for search and filters
+- [x] Add pagination of results
+- [x] Create API for search
+  - [x] Perform Web Scraping to gather information from websites
+  - [x] Add the Product info to database
 
 See the [open issues](https://github.com/Varun-Dhruv/durian-search/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
 
 ## Contributing
 
@@ -168,9 +186,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/Varun-Dhruv/durian-search](https://github.com/Varun-Dhruv/durian-search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
