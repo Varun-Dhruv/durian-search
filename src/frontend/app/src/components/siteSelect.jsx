@@ -5,8 +5,9 @@ const SiteFilter = ({ sites, setSites }) => {
         <>
             <Stack spacing={[1, 5]} direction={['column', 'row']}>
                 {
-                    Object.keys(sites).map((site) => {
+                    Object.keys(sites).map((site, key) => {
                         return (<Checkbox
+                            id={key}
                             size='lg'
                             colorScheme='green'
                             isChecked={sites[site]}

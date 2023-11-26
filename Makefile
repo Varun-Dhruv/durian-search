@@ -12,6 +12,10 @@ start-backend:
 	@echo "Starting backend..."
 	@cd src/backend/app && python manage.py runserver
 
+shell-backend:
+	@echo "Starting backend shell..."
+	@cd src/backend/app && python manage.py shell
+
 deps:
 	@echo "generating dependencies..."
 	@pip-compile -v src/backend/requirements.in

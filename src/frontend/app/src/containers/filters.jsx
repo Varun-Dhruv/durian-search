@@ -3,31 +3,22 @@ import RangeFilter from '@/components/rangeFilter';
 import { Box, Flex, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react';
 import { useState } from 'react';
 import SiteFilter from '@/components/siteSelect';
-const Filters = () => {
-    const [review, setReview] = useState({
-        min: 0,
-        max: 5
-    })
-    const [rating, setRating] = useState({
-        min: 0,
-        max: 100000
-    })
-    const [price, setPrice] = useState({
-        min: 0,
-        max: 100000
-    })
-    const [totalResults, setTotalResults] = useState(3)
-    const [webSites, setWebSites] = useState({
-        amazon: true,
-        flipkart: true,
-        snapdeal: true,
-        ebay: true,
-        paytm: true,
-    })
+const Filters = ({
+    review,
+    rating,
+    price,
+    totalResults,
+    webSites,
+    setReview,
+    setRating,
+    setPrice,
+    setTotalResults,
+    setWebSites
+}) => {
+
 
     return (
         <Box mt={10}>
-
             <Flex direction="column" gap={5} align={"center"} mx="auto">
                 <RangeFilter label="Review" min={review.min} max={review.max}
                     handleMin={(val) => {
@@ -43,7 +34,7 @@ const Filters = () => {
                     handleMax={(val) => {
                         setRating((prev) => { return { ...prev, max: val } })
                     }} />
-                < RangeFilter label="Review" min={price.min} max={price.max}
+                < RangeFilter label="Price" min={price.min} max={price.max}
                     handleMin={(val) => {
                         setPrice((prev) => { return { ...prev, min: val } })
                     }}

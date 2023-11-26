@@ -1,4 +1,6 @@
-from products.parser import scrape_amazon, scrape_flipkart, scrape_snapdeal
+import concurrent.futures
+
+from products.parser import scrape_website
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -14,18 +16,17 @@ def get_products(request):
             "total_products": request.query_params.get("totalProducts"),
         }
         data["websites"] = data["websites"][0].split(",") if data["websites"] else []
-
+        products = []
         for website in data["websites"]:
-            if website == "flipkart":
-                flipkart_products = scrape_flipkart(data["search_term"])
-            elif website == "amazon":
-                amazon_products = scrape_amazon(data["search_term"])
-            elif website == "snapdeal":
-                snapdeal_products = scrape_snapdeal(data["search_term"])
-            else:
+            if website not in ["flipkart", "amazon", "snapdeal"]:
                 return Response({"error": "Invalid website"}, status=400)
-        total = int(data["total_products"])
-        products = flipkart_products[:total] + amazon_products[:total] + snapdeal_products[:total]
+        total = int(data["total_products"]) if data["total_products"] else 3
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            tasks = zip(
+                data["websites"], [data["search_term"]] * len(data["websites"]), [total] * len(data["websites"])
+            )
+            products = [item for sublist in executor.map(scrape_website, *zip(*tasks)) for item in sublist]
+
         return Response({"products": products}, status=200)
     except Exception as e:
         return Response({"error": str(e)}, status=500)

@@ -4,7 +4,19 @@ from bs4 import BeautifulSoup
 from products.utils import convert_percentage_to_scale, getHTMLDocument
 
 
-def scrape_snapdeal(search_term):
+def scrape_website(website, search_term, total):
+    print(f"Scraping {website} for {search_term}, total: {total}")
+    if website == "flipkart":
+        return scrape_flipkart(search_term, total)
+    elif website == "amazon":
+        return scrape_amazon(search_term, total)
+    elif website == "snapdeal":
+        return scrape_snapdeal(search_term, total)
+    else:
+        return None
+
+
+def scrape_snapdeal(search_term, total):
     list_of_products = []
     base_url = "https://www.snapdeal.com/search"
     params = {"keyword": search_term}
@@ -16,7 +28,7 @@ def scrape_snapdeal(search_term):
         for product in products:
             # Extract information such as title, price, review count, rating, and URL
             title = product.find("p", {"class": "product-title"}).text.strip()
-            price = product.find("span", {"class": "product-price"}).text.strip().replace("Rs.  ", "")
+            price = product.find("span", {"class": "product-price"}).text.strip().replace("Rs.  ", "").replace(",", "")
 
             # Rating may not be available for all products
             rating_tag = product.find("div", {"class": "filled-stars"})
@@ -40,12 +52,12 @@ def scrape_snapdeal(search_term):
                         "website": "https://snapdeal.com",
                     }
                 )
-        return list_of_products
+        return list_of_products[:total]
     else:
         print(f"Failed to retrieve the page. Status code: {status_code}")
 
 
-def scrape_flipkart(search_term):
+def scrape_flipkart(search_term, total):
     list_of_products = []
     base_url = "https://www.flipkart.com/search"
     params = {"q": search_term}
@@ -86,12 +98,12 @@ def scrape_flipkart(search_term):
                         "website": "https://flipkart.com",
                     }
                 )
-        return list_of_products
+        return list_of_products[:total]
     else:
         print(f"Failed to retrieve the page. Status code: {status_code}")
 
 
-def scrape_amazon(search_term):
+def scrape_amazon(search_term, total):
     list_of_products = []
     base_url = "https://www.amazon.in/s"
     params = {"k": search_term}
@@ -123,6 +135,6 @@ def scrape_amazon(search_term):
                         "website": "https://amazon.in",
                     }
                 )
-        return list_of_products
+        return list_of_products[:total]
     else:
         print(f"Failed to retrieve the page. Status code: {status_code}")
