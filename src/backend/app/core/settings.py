@@ -10,7 +10,7 @@ SECRET_KEY = "django-insecure-*_uno3u(9oeuvp8q$i!gv8%t8y$($ss+-kp04zpq32-00)(t+m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["app-core-varun-dhruv.cloud.okteto.net", "app-ui-varun-dhruv.cloud.okteto.net", "localhost"]
 
 
 # Application definition

@@ -6,7 +6,7 @@ def convert_percentage_to_scale(percentage_value):
     return round(scaled_value, 2)
 
 
-def getHTMLDocument(url, params):
+def getHTMLDocument(url, params=None):
     headers = {
         "User-Agent": (
             "Mozilla/5.0 (X11; Linux x86_64)"
@@ -15,6 +15,8 @@ def getHTMLDocument(url, params):
         ),
         "Accept-Language": "en-US, en;q=0.5",
     }
-    response = requests.get(url, params=params, headers=headers)
-
+    if params is not None:
+        response = requests.get(url, params=params, headers=headers)
+    else:
+        response = requests.get(url, headers=headers)
     return response.status_code, response.text

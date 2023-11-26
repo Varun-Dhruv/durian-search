@@ -22,9 +22,8 @@ export default function Home() {
       websites: Object.keys(webSites).filter((key) => webSites[key]).join(','),
     }
     console.log(params)
-    axios.get(`http://localhost:8000/api/products`, { params: params })
+    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/products`, { params: params })
       .then(res => {
-        console.log(res.data)
         setProductData(res.data.products)
       }).catch(err => {
         console.log(err.response)
@@ -48,6 +47,8 @@ export default function Home() {
     amazon: true,
     flipkart: true,
     snapdeal: true,
+    blinkit: true,
+    jiomart: true,
   })
 
   return (

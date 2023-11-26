@@ -33,30 +33,6 @@ const ProductComparison = ({ productData }) => {
                                 )
                             })
                         }
-                        {/* <Tr>
-                            <Td>sample</Td>
-                            <Td>https://amazon.in</Td>
-                            <Td isNumeric>100</Td>
-                            <Td isNumeric>5</Td>
-                            <Td isNumeric>100</Td>
-                            <Td><a href="https://amazon.in">Amazon</a></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>sample</Td>
-                            <Td>https://amazon.in</Td>
-                            <Td isNumeric>100</Td>
-                            <Td isNumeric>5</Td>
-                            <Td isNumeric>100</Td>
-                            <Td>https://amazon.in</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>sample</Td>
-                            <Td>https://amazon.in</Td>
-                            <Td isNumeric>100</Td>
-                            <Td isNumeric>5</Td>
-                            <Td isNumeric>100</Td>
-                            <Td>https://amazon.in</Td>
-                        </Tr> */}
                     </Tbody>
                     <Tfoot>
                         <Tr>
